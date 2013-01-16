@@ -1,6 +1,10 @@
 package com.tvganesh.blob;
 
-
+/* 
+ * Developed by Tinniam V Ganesh, 16 Jan 2013
+ * Uses Box2D physics engine and AndEngine
+ * Based on http://gwtbox2d.appspot.com/ BlobJoint demo
+ */
 
 
 import org.andengine.engine.camera.Camera;
@@ -188,9 +192,7 @@ public class Blob extends SimpleBaseGameActivity implements IAccelerationListene
 			  
 			  this.mScene.attachChild(circle[i]);  
 			  
-		}
-		
-		
+		}	
 		//  Create a distanceJoint between every other day
 		for(int i= 0;i < nBodies-1; i++)  {
 			
@@ -204,13 +206,14 @@ public class Blob extends SimpleBaseGameActivity implements IAccelerationListene
 			   this.mPhysicsWorld.createJoint(distanceJoint);
 		   }
 		}
+		
+		  // Create a brick above the blob. Make it slightly heavy
 		  FIXTURE_DEF = PhysicsFactory.createFixtureDef(50f, 0.5f, 0.5f);
 		  brick = new Sprite(200,10, this.mBrickTextureRegion, this.getVertexBufferObjectManager());			
 		  brickBody = PhysicsFactory.createBoxBody(this.mPhysicsWorld, brick, BodyType.DynamicBody, FIXTURE_DEF);	  
 		  
 		  this.mPhysicsWorld.registerPhysicsConnector(new PhysicsConnector(brick, brickBody, true, true));
-		  this.mScene.attachChild(brick);		
-		
+		  this.mScene.attachChild(brick);			
 		
 		this.mScene.registerUpdateHandler(this.mPhysicsWorld);
 	}
